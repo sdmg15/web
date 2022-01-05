@@ -47,9 +47,19 @@ export type TxIdByAssetId = {
   [k: CAIP19]: string[]
 }
 
+// const ethAccountSpecifier: string = eip155:1:0xdef1...cafe
+// const btcAccountSpecifier: string = 'bip122:000000000019d6689c085ae165831e93:xpub...'
+// TODO(ryankk): Move this before merging
+type AccountSpecifier = string
+
+export type TxIdByAccountId = {
+  [k: AccountSpecifier]: string[]
+}
+
 export type TxHistory = {
   byId: TxHistoryById
   byAssetId: TxIdByAssetId
+  byAccountId: TxIdByAccountId
   ids: string[]
 }
 
@@ -59,7 +69,8 @@ export type TxMessage = { payload: { message: Tx } }
 const initialState: TxHistory = {
   byId: {},
   ids: [], // sorted, newest first
-  byAssetId: {}
+  byAssetId: {},
+  byAccountId: {}
 }
 
 /**
